@@ -1,0 +1,9 @@
+version: '2'
+services:
+  cloud9:
+    restart: always
+    image: sumikof/cloud9-docker
+    volumes:
+      - cloud9-work:/workspace
+    command:
+      - node /cloud9/server.js --port '80' -w /workspace -l 0.0.0.0 --auth user:password
