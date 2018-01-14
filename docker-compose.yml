@@ -1,9 +1,15 @@
-version: '2'
+version: '3'
 services:
   cloud9:
     restart: always
-    image: sumikof/cloud9-docker
+    image: sumikof/cloud9
+    ports:
+      - 80
     volumes:
-      - cloud9-work:/workspace
-    command:
-      - node /cloud9/server.js --port '80' -w /workspace -l 0.0.0.0 --auth user:password
+      - /mnt/docker/cloud9-work:/workspace
+    command: node /cloud9/server.js --port 80 -w /workspace -l 0.0.0.0 --auth user:password
+    networks:
+      - home_network
+networks:
+  home_network:
+    external: true
